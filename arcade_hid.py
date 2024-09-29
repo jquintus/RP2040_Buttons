@@ -8,51 +8,7 @@ from adafruit_seesaw.pwmout import PWMOut
 import board
 import digitalio as board_digitalio
 import usb_hid
-
-class PhysicalButton:
-    def __init__(self, id, button, led):
-        self.id = id
-        self.button = button
-        self.led = led
-        self.button_held = False
-
-    def set_on_press(self, action):
-        self.action = action
-
-    def sync(self):
-        if not self.button.value and not self.button_held:
-            self.button_held = True
-            self.led.value = True
-
-            self.action.onPress()
-            print (f'Pressed - Button {self.id}')
-
-        if self.button.value and self.button_held:
-            self.button_held = False
-            self.led.value = False
-            print (f'Released - Button {self.id}')
-
-class MockLED:
-    def __init__(self):
-        value = False
-
-class Knob:
-    def __init__(self, id, encoder, button):
-        led = MockLED()
-        self.encoder = encoder
-        self.button = PhysicalButton(id, button, led)
-
-    def set_on_press(self, action):
-        self.button.set_on_press(action)
-
-    def set_on_turn(self, up, down):
-        self.up = up
-        self.down = down
-        pass
-
-    def sync(self):
-        self.button.sync()
-        pass
+from arcade_hadware import Knob, PhysicalButton
 
 class ArcadeKeyboard:
     def start(self):
