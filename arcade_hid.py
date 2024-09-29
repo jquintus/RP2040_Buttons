@@ -46,10 +46,10 @@ class ArcadeKeyboard:
         arcade_qt_1 = seesaw.Seesaw(self.i2c, addr=0x3A)
         arcade_qt_2 = seesaw.Seesaw(self.i2c, addr=0x3B)
 
-        physical_button_1 = init_button(1, arcade_qt_1, button_pin=18, led_pin=12)
-        physical_button_2 = init_button(2, arcade_qt_1, button_pin=19, led_pin=13)
-        physical_button_3 = init_button(3, arcade_qt_1, button_pin=20, led_pin=0)
-        physical_button_4 = init_button(4, arcade_qt_1, button_pin=2,  led_pin=1)
+        physical_button_1 = init_button(1, arcade_qt_1, button_pin=2,  led_pin=1)
+        physical_button_2 = init_button(2, arcade_qt_1, button_pin=20, led_pin=0)
+        physical_button_3 = init_button(3, arcade_qt_1, button_pin=19, led_pin=13)
+        physical_button_4 = init_button(4, arcade_qt_1, button_pin=18, led_pin=12)
 
         physical_button_5 = init_button(5, arcade_qt_2, button_pin=18, led_pin=12)
         physical_button_6 = init_button(6, arcade_qt_2, button_pin=19, led_pin=13)
