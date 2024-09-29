@@ -1,7 +1,9 @@
 This is the project site for a custom keyboard with 8 arcade style buttons and
 a volume knob based off of Adafruit's feather boards.
 
-This is a continuation of my [MakerCamp2024ArcadeButtons](https://github.com/jquintus/MakerCamp2024ArcadeButtons) proejct.
+This is a continuation of my [MakerCamp2024ArcadeButtons](https://github.com/jquintus/MakerCamp2024ArcadeButtons) and [buttonMaster](https://github.com/jquintus/buttonMaster)projects.
+
+The Maker Camp project was completed and delivered so that code is complete and will not change. The buttonMaster project was a great learning experience. For one thing, I've learned that I actually do not want the keyboard to be Bluetooth. My setup has changed and it's no longer required and adds complexity (charging and connectivity). 
 
 # Hardware and Software dependencies
 
