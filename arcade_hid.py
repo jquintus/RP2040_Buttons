@@ -16,7 +16,7 @@ class PhysicalButton:
         self.led = led
         self.button_held = False
 
-    def set_action(self, action):
+    def set_on_press(self, action):
         self.action = action
 
     def sync(self):
@@ -31,6 +31,28 @@ class PhysicalButton:
             self.button_held = False
             self.led.value = False
             print (f'Released - Button {self.id}')
+
+class MockLED:
+    def __init__(self):
+        value = False
+
+class Knob:
+    def __init__(self, id, encoder, button):
+        led = MockLED()
+        self.encoder = encoder
+        self.button = PhysicalButton(id, button, led)
+
+    def set_on_press(self, action):
+        self.button.set_on_press(action)
+
+    def set_on_turn(self, up, down):
+        self.up = up
+        self.down = down
+        pass
+
+    def sync(self):
+        self.button.sync()
+        pass
 
 class ArcadeKeyboard:
     def start(self):
@@ -104,7 +126,7 @@ class ArcadeKeyboard:
         button = digitalio.DigitalIO(seesawBoard, 24)
         encoder = rotaryio.IncrementalEncoder(seesawBoard)
 
-        return encoder, button
+        return Knob(0, encoder, button)
 
     def get_keyboard(self):
         return self.k
