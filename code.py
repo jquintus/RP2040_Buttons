@@ -6,7 +6,7 @@ from adafruit_hid.consumer_control_code import ConsumerControlCode
 
 # my imports
 from arcade_hid import ArcadeKeyboard
-from buttons import LambdaButton, EmptyButton, KeyComboButton, VolumeButtons, ZoomButtons
+from buttons import EmptyButton, VolumeButtons, ZoomButtons
 
 print("Hello, CircuitPython!")
 
@@ -34,6 +34,17 @@ buttons[4].set_on_press(zoom.toggle_audio)        # Bottom  Red
 buttons[5].set_on_press(zoom.pause_share)         # Bottom  Yellow
 buttons[6].set_on_press(zoom.raise_hand)          # Bottom  Green
 buttons[7].set_on_press(EmptyButton("Button 8"))  # Bottom  Blue
+
+# Flash the lights on startup
+for idx in [0, 1, 2, 3, 7, 6, 5, 4]:
+    buttons[idx].led.value = True
+    time.sleep(0.1)
+
+time.sleep(0.2)
+
+for idx in [0, 1, 2, 3, 7, 6, 5, 4]:
+    buttons[idx].led.value = False
+    time.sleep(0.1)
 
 print ("Player one, fight!")
 while True:
