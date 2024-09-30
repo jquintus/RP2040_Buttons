@@ -30,11 +30,11 @@ class KeyComboButton:
             print(f"Pressing Keycode {keycode}")
             self.keyboard.send(Keycode.CONTROL, Keycode.SHIFT, Keycode.ALT, keycode)
 
-class VolumeButton:
-    def __init__(self, name, consumerControl, volumeCommand):
+class MediaButton:
+    def __init__(self, name, consumerControl, mediaCommand):
         self.name = name
         self.consumerControl = consumerControl
-        self.cmd = volumeCommand
+        self.cmd = mediaCommand
 
     def onPress(self):
         print(f"Pressed - {self.name}")
@@ -44,9 +44,25 @@ class VolumeButton:
 
 class VolumeButtons:
     def __init__(self, cc):
-        self.mute = VolumeButton("Volume Mute", cc, ConsumerControlCode.MUTE)
-        self.down = VolumeButton("Volume Down", cc, ConsumerControlCode.VOLUME_DECREMENT)
-        self.up   = VolumeButton("Volume Up",   cc, ConsumerControlCode.VOLUME_INCREMENT)
+        self.mute = MediaButton("Volume Mute", cc, ConsumerControlCode.MUTE)
+        self.down = MediaButton("Volume Down", cc, ConsumerControlCode.VOLUME_DECREMENT)
+        self.up   = MediaButton("Volume Up",   cc, ConsumerControlCode.VOLUME_INCREMENT)
+
+class MonitorButtons:
+    def __init__(self, cc):
+        self.increase_brightness = MediaButton("Increase Monitor Brightness", cc, ConsumerControlCode.BRIGHTNESS_INCREMENT)  # Increase the monitor brightness
+        self.decrease_brightness = MediaButton("Decrease Monitor Brightness", cc, ConsumerControlCode.BRIGHTNESS_DECREMENT)  # Decrease the monitor brightness
+
+class MediaButtons:
+    def __init__(self, cc):
+        self.eject        = MediaButton("Eject", cc, ConsumerControlCode.EJECT)                       # No impact when using Spotify
+        self.fast_forward = MediaButton("Fast Forward", cc, ConsumerControlCode.FAST_FORWARD)         # Jump ahead 5 seconds
+        self.play         = MediaButton("Play", cc, ConsumerControlCode.PLAY_PAUSE)                   # Play or Pause
+        self.record       = MediaButton("Record", cc, ConsumerControlCode.RECORD)                     # No impact when using Spotify
+        self.rewind       = MediaButton("Rewind", cc, ConsumerControlCode.REWIND)                     # No impact when using Spotify
+        self.next         = MediaButton("Next", cc, ConsumerControlCode.SCAN_NEXT_TRACK)              # Skip to Next Track
+        self.previous     = MediaButton("Previous", cc, ConsumerControlCode.SCAN_PREVIOUS_TRACK)      # Go to previous track
+        self.stop         = MediaButton("Stop", cc, ConsumerControlCode.STOP)                         # Stop. Unlike Pause, this will not start playing again if pressed a second time
 
 class ZoomButtons:
     def __init__(self, k):

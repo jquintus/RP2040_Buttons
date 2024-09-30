@@ -6,7 +6,7 @@ from adafruit_hid.consumer_control_code import ConsumerControlCode
 
 # my imports
 from arcade_hid import ArcadeKeyboard
-from buttons import EmptyButton, VolumeButtons, ZoomButtons
+from buttons import EmptyButton, VolumeButtons, MediaButtons, ZoomButtons
 
 print("Hello, CircuitPython!")
 
@@ -18,6 +18,7 @@ k = keyboard.get_keyboard()
 
 zoom = ZoomButtons(k)
 volume = VolumeButtons(cc)
+media = MediaButtons(cc)
 
 encoder = keyboard.init_encoder()
 buttons = keyboard.init_buttons()
@@ -28,12 +29,12 @@ encoder.set_on_turn(volume.up, volume.down)
 buttons[0].set_on_press(zoom.toggle_video)        # Top     Red
 buttons[1].set_on_press(zoom.start_share)         # Top     Yellow
 buttons[2].set_on_press(zoom.copy_invite_link)    # Top     Green
-buttons[3].set_on_press(EmptyButton("Button 4"))  # Top     Blue
+buttons[3].set_on_press(media.play)               # Top     Blue
 
 buttons[4].set_on_press(zoom.toggle_audio)        # Bottom  Red
 buttons[5].set_on_press(zoom.pause_share)         # Bottom  Yellow
 buttons[6].set_on_press(zoom.raise_hand)          # Bottom  Green
-buttons[7].set_on_press(EmptyButton("Button 8"))  # Bottom  Blue
+buttons[7].set_on_press(media.next)               # Bottom  Blue
 
 # Flash the lights on startup
 for idx in [0, 1, 2, 3, 7, 6, 5, 4]:
