@@ -27,7 +27,7 @@ class KeyComboButton:
     def onPress(self):
         print(f"Pressed - {self.name}")
         for keycode in self.keycodes:
-            print(f"Pressing {keycode}")
+            print(f"Pressing Keycode {keycode}")
             self.keyboard.send(Keycode.CONTROL, Keycode.SHIFT, Keycode.ALT, keycode)
 
 class VolumeButton:
@@ -41,6 +41,12 @@ class VolumeButton:
         cc = self.consumerControl
         cmd = self.cmd
         cc.send(cmd)
+
+class VolumeButtons:
+    def __init__(self, cc):
+        self.mute = VolumeButton("Volume Mute", cc, ConsumerControlCode.MUTE)
+        self.down = VolumeButton("Volume Down", cc, ConsumerControlCode.VOLUME_DECREMENT)
+        self.up   = VolumeButton("Volume Up",   cc, ConsumerControlCode.VOLUME_INCREMENT)
 
 class ZoomButtons:
     def __init__(self, k):
@@ -57,9 +63,3 @@ class OBS_Buttons:
         self.screen_shot             = KeyComboButton("OBS: Screen Shot Output",       k, Keycode.F9)
         self.toggle_virtual_camera   = KeyComboButton("OBS: Toggle Virtual Camera",    k, Keycode.F12)
         self.switch_to_default_scene = KeyComboButton("OBS: Switch to Default Scene",  k, Keycode.F11, Keycode.F10)
-
-class VolumeButtons:
-    def __init__(self, cc):
-        self.mute = VolumeButton("Volume Mute", cc, ConsumerControlCode.MUTE)
-        self.down = VolumeButton("Volume Down", cc, ConsumerControlCode.VOLUME_DECREMENT)
-        self.up   = VolumeButton("Volume Up",   cc, ConsumerControlCode.VOLUME_INCREMENT)
