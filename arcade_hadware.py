@@ -9,14 +9,16 @@ class PhysicalButton:
         self.action = action
 
     def sync(self):
-        if not self.button.value and not self.button_held:
+        button_value = self.button.value
+        button_held = self.button_held
+        if not button_value and not button_held:
             self.button_held = True
             self.led.value = True
 
             self.action.onPress()
             print (f'Pressed - Button {self.id}')
 
-        if self.button.value and self.button_held:
+        if button_value and button_held:
             self.button_held = False
             self.led.value = False
             print (f'Released - Button {self.id}')
