@@ -21,6 +21,17 @@ The Maker Camp project was completed and delivered so that code is complete and 
 # How to Install
 First, install CircuitPython (see below).
 
+## Install from macOS
+
+In System Settings > Privacy & Security > Files & Folders, allow cmux access to
+Removable Volumes. Then connect the board and run:
+
+```sh
+./install-mac.sh
+```
+
+The script copies this repository's files to the `CIRCUITPY` drive.
+
 ## Install via github
 1. Plug the board into your computer
 2. Delete everything from the device
