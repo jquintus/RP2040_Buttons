@@ -5,6 +5,7 @@ repo_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)
 volume=/Volumes/CIRCUITPY
 
 if [[ ! -d "$volume" ]]; then
+    echo "Switching White Box to update mode..."
     python3 "$repo_dir/board_mode.py" SAFE_MODE
     for _ in {1..30}; do
         [[ -d "$volume" ]] && break
@@ -26,8 +27,10 @@ if [[ ! -f "$volume/boot_out.txt" ]]; then
     exit 1
 fi
 
-rsync -r --exclude='.git' --exclude='.DS_Store' "$repo_dir/" "$volume/"
-sync
+echo "Copying files to White Box..."
+rsync -rtvc --progress --exclude='.git' --exclude='.DS_Store' "$repo_dir/" "$volume/"
+echo "Ejecting CIRCUITPY..."
 diskutil unmount "$volume"
+echo "Restarting White Box..."
 python3 "$repo_dir/board_mode.py" NORMAL
-echo "Installed RP2040_Buttons to $volume"
+echo "White Box is ready"
