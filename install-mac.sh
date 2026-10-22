@@ -5,8 +5,15 @@ repo_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)
 volume=/Volumes/CIRCUITPY
 
 if [[ ! -d "$volume" ]]; then
-    echo "CIRCUITPY is not mounted at $volume" >&2
-    exit 1
+    python3 "$repo_dir/board_mode.py" SAFE_MODE
+    for _ in {1..30}; do
+        [[ -d "$volume" ]] && break
+        sleep 1
+    done
+    if [[ ! -d "$volume" ]]; then
+        echo "CIRCUITPY did not mount in safe mode" >&2
+        exit 1
+    fi
 fi
 
 if ! ls "$volume" >/dev/null 2>&1; then
@@ -21,4 +28,6 @@ fi
 
 rsync -r --exclude='.git' --exclude='.DS_Store' "$repo_dir/" "$volume/"
 sync
+diskutil unmount "$volume"
+python3 "$repo_dir/board_mode.py" NORMAL
 echo "Installed RP2040_Buttons to $volume"

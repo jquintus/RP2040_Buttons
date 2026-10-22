@@ -30,7 +30,15 @@ Removable Volumes. Then connect the board and run:
 ./install-mac.sh
 ```
 
-The script copies this repository's files to the `CIRCUITPY` drive.
+The script makes the drive available through CircuitPython safe mode, copies this
+repository's files, ejects the drive, and restarts the keyboard. Normal boots
+do not expose a disk to the Mac, so sleeping or shutting down cannot disconnect
+a mounted `CIRCUITPY` drive. The installer uses the USB serial console; no
+hardware buttons are needed for updates.
+
+If the USB serial console is unavailable, press reset again during the yellow
+startup flashes to enter CircuitPython safe mode. This bypasses `boot.py` and
+exposes `CIRCUITPY` for recovery.
 
 ## Install via github
 1. Plug the board into your computer
